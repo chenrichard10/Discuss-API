@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -84,15 +85,15 @@ WSGI_APPLICATION = 'discussAI.wsgi.application'
 
 # Uncomment out this portion for the ease of use 
 DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'd3250m1khfu9eu',
-       # 'USER': 'jqewrssfjgxyzx',
-      #  'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
-     #   'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
-        # Or an IP Address that your DB is hosted on
-    #    'PORT': '5432',
-   # }
+  #      'default': {
+ #           'ENGINE': 'django.db.backends.postgresql',
+   #         'NAME': 'd3250m1khfu9eu',
+    #        'USER': 'jqewrssfjgxyzx',
+    #        'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
+    #        'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
+            # Or an IP Address that your DB is hosted on
+   #         'PORT': '5432',
+  #      }
 }
 
 
