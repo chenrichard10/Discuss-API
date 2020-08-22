@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import psycopg2
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +30,7 @@ SECRET_KEY = 'k+#6wkmnj#ar*y0_oqw0n74m2(%ojuqubid%i6k^shw3oopr*j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -47,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -77,10 +83,15 @@ WSGI_APPLICATION = 'discussAI.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql',
+    #    'NAME': 'd3250m1khfu9eu',
+    #    'USER': 'jqewrssfjgxyzx',
+    #    'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
+    #    'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
+    #    # Or an IP Address that your DB is hosted on
+    #    'PORT': '5432',
+    #}
 }
 
 
@@ -121,4 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_FILE_STORAGE = 'api.storage.AzureMediaStorage'
+
+
+#Postgres connection 
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
