@@ -1,0 +1,1 @@
+web: gunicorn --chdir discussAI discussAI.wsgi --log-file - 

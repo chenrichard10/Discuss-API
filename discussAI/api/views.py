@@ -29,4 +29,4 @@ class DocumentUploadAPIView(APIView):
         f = request.data['file']
         doc = Document(name=filename, pdf=f)
         doc.save()
-        return Response({"Success": "Brogey Groge"}, status=status.HTTP_201_CREATED)
+        return Response({"Success": ""}, status=status.HTTP_201_CREATED)
