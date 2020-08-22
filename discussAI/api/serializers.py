@@ -7,3 +7,7 @@ class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         fields = ['name', 'pdf']
+        # Find the colour that is most aggregrated
+        # Find colours that are not equal to aggregrated
+        # If someone if not equal to black
+        # Filter for italics
