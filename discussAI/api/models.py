@@ -12,3 +12,8 @@ class Result(models.Model):
     link = models.FileField()
     page = models.IntegerField()
    
+class DocumentPages(models.Model):
+    pdf = models.ForeignKey(Document, on_delete=models.CASCADE)
+    page = models.IntegerField()
+    image = models.FileField()
+
