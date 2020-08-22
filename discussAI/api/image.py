@@ -5,8 +5,8 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-os.environ['COMPUTER_VISION_ENDPOINT'] = 'https://dicussai.cognitiveservices.azure.com/'
-os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY'] = '2a76c92e856c4b39a7d96f0d47aecca1'
+os.environ['COMPUTER_VISION_ENDPOINT'] = ''
+os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY'] = ''
 
 # Add your Computer Vision subscription key and endpoint to your environment variables.
 if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
