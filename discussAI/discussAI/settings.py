@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k+#6wkmnj#ar*y0_oqw0n74m2(%ojuqubid%i6k^shw3oopr*j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
@@ -82,16 +82,17 @@ WSGI_APPLICATION = 'discussAI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# Uncomment out this portion for the ease of use 
 DATABASES = {
     #'default': {
-    #    'ENGINE': 'django.db.backends.postgresql',
-    #    'NAME': 'd3250m1khfu9eu',
-    #    'USER': 'jqewrssfjgxyzx',
-    #    'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
-    #    'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
-    #    # Or an IP Address that your DB is hosted on
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'd3250m1khfu9eu',
+       # 'USER': 'jqewrssfjgxyzx',
+      #  'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
+     #   'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
+        # Or an IP Address that your DB is hosted on
     #    'PORT': '5432',
-    #}
+   # }
 }
 
 
@@ -136,6 +137,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_FILE_STORAGE = 'api.storage.AzureMediaStorage'
 
 
-#Postgres connection 
+#Postgres connection
 import dj_database_url
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)

@@ -7,3 +7,8 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+class Result(models.Model):
+    link = models.FileField()
+    page = models.IntegerField()
+   

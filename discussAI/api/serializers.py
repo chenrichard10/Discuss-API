@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Document
+from .models import Document, Result
 
 class DocumentSerializer(serializers.ModelSerializer):
     """ Serializer for documents to JSON """
@@ -11,3 +11,11 @@ class DocumentSerializer(serializers.ModelSerializer):
         # Find colours that are not equal to aggregrated
         # If someone if not equal to black
         # Filter for italics
+
+class ResultSerializer(serializers.ModelSerializer):
+    """ Serializer for results """
+
+    class Meta:
+        model = Result
+        fields = ['link', 'page']
+

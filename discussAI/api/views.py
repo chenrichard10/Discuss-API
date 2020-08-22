@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from .models import Document
-from .serializers import DocumentSerializer
+from .models import Document, Result
+from .serializers import DocumentSerializer, ResultSerializer
 from rest_framework.exceptions import ParseError
 from rest_framework import generics
 from rest_framework import status
@@ -13,10 +13,12 @@ def index(request):
     """ Basic home page """
     return HttpResponse("Hello, world. You're at the discussAI main page.")
 
+
 class DocumentAPIView(generics.ListAPIView):
     """ APIView for all documents """
     serializer_class = DocumentSerializer
     queryset = Document.objects.all()
+
 
 class DocumentUploadAPIView(APIView):
     """ APIView for uploading images """
@@ -30,3 +32,15 @@ class DocumentUploadAPIView(APIView):
         doc = Document(name=filename, pdf=f)
         doc.save()
         return Response({"Success": ""}, status=status.HTTP_201_CREATED)
+
+
+class AskQuestionAPIView(generics.ListAPIView):
+    serializer_class = ResultSerializer
+    queryset = Result.objects.all()
+
+    def get_serializer_context(self):
+        """ this function is used in the UserCreateSerializer to get
+            the question """
+        context = super(AskQuestionAPIView, self).get_serializer_context()
+        context.update({"question": self.kwargs["question"]})
+        return context
