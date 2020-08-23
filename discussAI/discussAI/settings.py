@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import psycopg2
 
-DATABASE_URL = os.environ['DATABASE_URL']
+#DATABASE_URL = os.environ['DATABASE_URL']
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k+#6wkmnj#ar*y0_oqw0n74m2(%ojuqubid%i6k^shw3oopr*j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,15 +87,15 @@ WSGI_APPLICATION = 'discussAI.wsgi.application'
 
 # Uncomment out this portion for the ease of use 
 DATABASES = {
-  #      'default': {
- #           'ENGINE': 'django.db.backends.postgresql',
-   #         'NAME': 'd3250m1khfu9eu',
-    #        'USER': 'jqewrssfjgxyzx',
-    #        'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
-    #        'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql',
+           'NAME': 'd3250m1khfu9eu',
+           'USER': 'jqewrssfjgxyzx',
+           'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
+           'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
             # Or an IP Address that your DB is hosted on
-   #         'PORT': '5432',
-  #      }
+           'PORT': '5432',
+        }
 }
 
 
@@ -141,5 +141,5 @@ DEFAULT_FILE_STORAGE = 'api.storage.AzureMediaStorage'
 
 
 #Postgres connection
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+#import dj_database_url
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600)

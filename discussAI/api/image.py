@@ -5,8 +5,8 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-os.environ['COMPUTER_VISION_ENDPOINT'] = ''
-os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY'] = ''
+os.environ['COMPUTER_VISION_ENDPOINT'] = 'https://dicussai.cognitiveservices.azure.com/'
+os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY'] = '2a76c92e856c4b39a7d96f0d47aecca1'
 
 # Add your Computer Vision subscription key and endpoint to your environment variables.
 if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
@@ -24,7 +24,6 @@ def image_to_json(image_paths):
     json_arr = []
     bounded_top = -3
     
-
     for image_path in image_paths:
         # Read the image into a byte array
         image_data = open(image_path, "rb").read()
@@ -85,4 +84,4 @@ def image_to_json(image_paths):
 
     return new_arr
 
-print(image_to_json(["Forrest_M137CN-12-1.png", "Forrest_M137CN-12-15-2-1.png", "Forrest_M137CN-12-15-3-1.png"]))
+print(image_to_json(["C:/Users/chenp/Desktop/page_1.png", "C:/Users/chenp/Desktop/page_2.png", "C:/Users/chenp/Desktop/page_3.png", "C:/Users/chenp/Desktop/page_4.png"]))
