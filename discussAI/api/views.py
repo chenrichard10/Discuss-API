@@ -120,6 +120,6 @@ class AskQuestionAPIView(APIView):
                         print(pos)
                         link = result_image(url, int(left), int(top), int(right), int(bottom))
                         return Response({"link": link, "page": pos}, status=status.HTTP_202_ACCEPTED)
-        return Response({"link": " ", "page": 0}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"link": " ", "page": 0}, status=status.HTTP_202_ACCEPTED)
                         
      
