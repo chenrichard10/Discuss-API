@@ -26,12 +26,13 @@ def image_to_json(image_paths):
     
     for image_path in image_paths:
         # Read the image into a byte array
-        image_data = open(image_path, "rb").read()
+        response = requests.get(image_path)
+        image_data = BytesIO(response.content)
         # Set Content-Type to octet-stream
         headers = {'Ocp-Apim-Subscription-Key': subscription_key, 'Content-Type': 'application/octet-stream'}
         params = {'language': 'unk'}
         # put the byte array into your post request
-        response = requests.post(ocr_url, headers=headers, params=params, data = image_data)
+        response = requests.post(ocr_url, headers=headers, params=params, data=image_data)
         response.raise_for_status()
 
         analysis = response.json()
@@ -44,12 +45,13 @@ def image_to_json(image_paths):
                 for word_info in word_metadata["words"]:
                     if word_info['text'] == 'DEFINITION' or word_info['text'] == 'THEOREM':
                         word_infos.append(word_info)
-                        bounded_top = int(word_info['boundingBox'].split(',')[1]) + 2
+                        bounded_top = int(word_info['boundingBox'].split(',')[1]) + 3
                     if int(word_info['boundingBox'].split(',')[1]) == bounded_top:
                         word_infos.append(word_info)
 
         json_arr.append([image_path, word_infos])
-
+     
+    
     new_arr = []
     page_count = 1
 
@@ -84,4 +86,4 @@ def image_to_json(image_paths):
 
     return new_arr
 
-print(image_to_json(["C:/Users/chenp/Desktop/page_1.png", "C:/Users/chenp/Desktop/page_2.png", "C:/Users/chenp/Desktop/page_3.png", "C:/Users/chenp/Desktop/page_4.png"]))
+print(image_to_json(['https://discussai.blob.core.windows.net/media/page1_77tCnWq.png', 'https://discussai.blob.core.windows.net/media/page1_77tCnWq.png']))
