@@ -1,38 +1,41 @@
+""" Azure OCR Processing done here """
 import os
 import sys
-import requests
-
-from PIL import Image
 from io import BytesIO
+
+import requests
 
 os.environ['COMPUTER_VISION_ENDPOINT'] = 'https://dicussai.cognitiveservices.azure.com/'
 os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY'] = '2a76c92e856c4b39a7d96f0d47aecca1'
 
 # Add your Computer Vision subscription key and endpoint to your environment variables.
 if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
-    subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
+    SUBSCRIPTION_KEY = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
 else:
-    print("\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
+    print(f"\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n"
+          "**Restart your shell or IDE for changes to take effect.**")
     sys.exit()
 
 if 'COMPUTER_VISION_ENDPOINT' in os.environ:
-    endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+    END_POINT = os.environ['COMPUTER_VISION_ENDPOINT']
 
-ocr_url = endpoint + "vision/v3.0/ocr"
+OCR_URL = END_POINT + "vision/v3.0/ocr"
 
 def image_to_json(image_paths):
+    """ Converting the image to JSON """
     json_arr = []
     bounded_top = -3
-    
+
     for image_path in image_paths:
         # Read the image into a byte array
         response = requests.get(image_path)
         image_data = BytesIO(response.content)
         # Set Content-Type to octet-stream
-        headers = {'Ocp-Apim-Subscription-Key': subscription_key, 'Content-Type': 'application/octet-stream'}
+        headers = {'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY,
+                   'Content-Type': 'application/octet-stream'}
         params = {'language': 'unk'}
         # put the byte array into your post request
-        response = requests.post(ocr_url, headers=headers, params=params, data=image_data)
+        response = requests.post(OCR_URL, headers=headers, params=params, data=image_data)
         response.raise_for_status()
 
         analysis = response.json()
@@ -50,8 +53,7 @@ def image_to_json(image_paths):
                         word_infos.append(word_info)
 
         json_arr.append([image_path, word_infos])
-     
-    
+    # Create a new array
     new_arr = []
     page_count = 1
 
@@ -61,7 +63,6 @@ def image_to_json(image_paths):
         sub_arr.append(page_count)
         page_count += 1
         if i[1] != []:
-            term = ""
             arr_pos = i[1][0]["boundingBox"].split(',')
             left_pos = int(arr_pos[0]) - 25
             top_pos = int(arr_pos[1])
@@ -85,5 +86,6 @@ def image_to_json(image_paths):
         new_arr.append(sub_arr)
 
     return new_arr
-
-print(image_to_json(['https://discussai.blob.core.windows.net/media/page1_77tCnWq.png', 'https://discussai.blob.core.windows.net/media/page1_77tCnWq.png']))
+# More test cases
+#print(image_to_json(['https://discussai.blob.core.windows.net/media/page1_77tCnWq.png',
+#                     'https://discussai.blob.core.windows.net/media/page1_77tCnWq.png']))

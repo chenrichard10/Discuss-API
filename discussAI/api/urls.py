@@ -1,6 +1,8 @@
+""" URL routing for API """
 from django.urls import path
+
 from . import views
-from .views import DocumentAPIView, DocumentUploadAPIView, AskQuestionAPIView
+from .views import AskQuestionAPIView, DocumentAPIView, DocumentUploadAPIView
 
 urlpatterns = [
     path('', views.index, name='index'),

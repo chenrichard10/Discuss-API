@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 import psycopg2
 
 #DATABASE_URL = os.environ['DATABASE_URL']
@@ -30,7 +31,7 @@ SECRET_KEY = 'k+#6wkmnj#ar*y0_oqw0n74m2(%ojuqubid%i6k^shw3oopr*j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.heroku_app.com', '127.0.0.1']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -85,17 +86,17 @@ WSGI_APPLICATION = 'discussAI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# Uncomment out this portion for the ease of use 
+# Uncomment out this portion for the ease of use
 DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'd3250m1khfu9eu',
-           'USER': 'jqewrssfjgxyzx',
-           'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
-           'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
-            # Or an IP Address that your DB is hosted on
-           'PORT': '5432',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd3250m1khfu9eu',
+        'USER': 'jqewrssfjgxyzx',
+        'PASSWORD': '5347312a0e3aac72ac1fffee19cd19215022d66bace4d68353ba7d2e5ef765ab',
+        'HOST': 'ec2-18-210-180-94.compute-1.amazonaws.com',
+        # Or an IP Address that your DB is hosted on
+        'PORT': '5432',
+    }
 }
 
 

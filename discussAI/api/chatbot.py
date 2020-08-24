@@ -1,8 +1,7 @@
 import numpy as np
 from numpy.random import randn
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.metrics.pairwise import euclidean_distances
+from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 
 documents = ["Memes are the best",
 "I love dogs",
